@@ -22,8 +22,8 @@
                     url:'http://127.0.0.1:8080/simple',
                     data:JSON.stringify(data),  //转化字符串
                     contentType: 'application/json; charset=UTF-8',
-                    success:function(){ //成功的话，得到消息
-                        alert("123")
+                    success:function(data_return){ //成功的话，得到消息
+                        alert(data_return)
                     }
                 });
     }
