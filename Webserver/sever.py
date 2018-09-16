@@ -11,8 +11,11 @@ CORS(app,supports_credentials=True)
 def simple():
     if request.method == 'POST':
         print(request.get_json())
-        result = login.to_login(request.get_json()['name'], request.get_json()['pwd'], "mytest", "user")
-        return result
+        try:
+            result = login.to_login(request.get_json()['name'], request.get_json()['pwd'], "mytest", "user")
+            return result
+        except:
+            return "error"
 
 
 if __name__ == '__main__':
