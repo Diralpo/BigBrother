@@ -22,7 +22,7 @@ def main_sign_in():
     if request.method == 'POST':
         print(request.get_json())
         try:
-            db_helper.login_db(request.get_json()['name'], request.get_json()['pwd'], const.DB_NAME)
+            db, cursor = db_helper.login_db(request.get_json()['name'], request.get_json()['pwd'], const.DB_NAME)
             print('success')
             return 'success'
         except:
@@ -35,4 +35,5 @@ def main_sign_up():
 
 
 if __name__ == '__main__':
-    app.run(debug=True,port=8080)
+    #app.run(debug=True,port=8080)
+    app.run(host='0.0.0.0', port=8080)
