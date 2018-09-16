@@ -3,8 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="../Resources/jquery-3.3.1.js"></script>
+    <script src="../Resources/bootstrap.min.js"></script>
+    <link href="../Resources/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search for..." id="1">
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="button" onclick="test()">Go!</button>
+        </span>
+    </div>
+<script>
+    function test() {
+        var data={"name":"jiangfeng"};
+                $.ajax({
+                    type: 'POST',
+                    url:'http://127.0.0.1:8080/simple',
+                    data:JSON.stringify(data),  //转化字符串
+                    contentType: 'application/json; charset=UTF-8',
+                    success:function(){ //成功的话，得到消息
+                        alert("123")
+                    }
+                });
+    }
 
+
+</script>
 </body>
 </html>
