@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import request
 from flask_cors import *
+from Webserver import login
 
 app = Flask(__name__)
 CORS(app,supports_credentials=True)
@@ -10,7 +11,8 @@ CORS(app,supports_credentials=True)
 def simple():
     if request.method == 'POST':
         print(request.get_json())
-        return str(request.get_json())
+        result = login.to_login(request.get_json()['name'], request.get_json()['pwd'], "mytest", "user")
+        return result
 
 
 if __name__ == '__main__':

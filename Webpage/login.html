@@ -1,21 +1,39 @@
-<html>
-<head><title>实验</title></head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../Resources/jquery-3.3.1.js"></script>
+    <script src="../Resources/bootstrap.min.js"></script>
+    <link href="../Resources/bootstrap.min.css" rel="stylesheet">
+</head>
 <body>
-<h1 style="font-family:汉仪乐喵体简;font-size:60px;background-color:#696969;color:#00FFFF;text-align:center">关于数据库的实验</h1>
-<hr/>
-<pre>
-    <input name="user_name" value="Tom" class="rle" maxlength="10" onKeyPress="getkey(event,0);">
-    <br/>
-    <input name="user_id" value="16881111" class="rle" maxlength="12" onKeyPress="getkey(event,0);">
-    <br/>
-    <input onclick="notfound()" type="button" value="发送" name="button">
-</pre>
-<hr/>
-<address style="text-align:right">
+    <div class="input-group">
+        <input type="text" class="form-control" name="username" placeholder="username" id="username">
+        <input type="password" class="form-control" name="pwd" placeholder="password" id="pwd">
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="button" onclick="getkey()">Go!</button>
+        </span>
+    </div>
+<script>
+    function getkey( ){
+        var user = document.getElementById("username").value
+        var pwd = document.getElementById("pwd").value
+        test(user, pwd)
+    }
+    function test(user, pwd) {
+        var data={"name":user, "pwd":pwd};
+                $.ajax({
+                    type: 'POST',
+                    url:'http://127.0.0.1:8080/simple',
+                    data:JSON.stringify(data),  //转化字符串
+                    contentType: 'application/json; charset=UTF-8',
+                    success:function(data_return){ //成功的话，得到消息
+                        alert(data_return)
+                    }
+                });
+    }
 
-Written by <a href="https://github.com/Diralpo/"> <acronym title="一只弱鶸">diralpo</acronym> </a> and <a href="https://github.com/mahaoxiang822"> <acronym title="真大佬">ma</acronym> </a>.<br>
-Visit us at: China
-
-</address>
+</script>
 </body>
 </html>
