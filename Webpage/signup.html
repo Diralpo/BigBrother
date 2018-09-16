@@ -11,7 +11,7 @@
     <div align="center">
         <input type="text" class="form-control" name="username" placeholder="username" id="username"  maxlength="15">
         <input type="password" class="form-control" name="pwd" placeholder="password" id="pwd"  maxlength="15">
-        <button class="btn btn-default" type="button" onclick="getkey()">login</button>
+        <button class="btn btn-default" type="button" onclick="getkey()">sign up</button>
     </div>
 <script>
     function getkey( ){
@@ -23,7 +23,7 @@
         var data={"name":user, "pwd":pwd};
                 $.ajax({
                     type: 'POST',
-                    url:'http://127.0.0.1:8080/login',
+                    url:'http://127.0.0.1:8080/signup',
                     data:JSON.stringify(data),  //转化字符串
                     contentType: 'application/json; charset=UTF-8',
                     success:function(data_return){ //成功的话，得到消息
