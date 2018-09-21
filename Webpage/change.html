@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../Resources/jquery-3.3.1.js"></script>
+    <script src="../Resources/bootstrap.min.js"></script>
+    <link href="../Resources/bootstrap.min.css" rel="stylesheet">
+    <link href="../Resources/MyCss.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 50px;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar" style="height: 100px">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#" style="font-size: 25px">简易学生信息系统</a><
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="index.html" style="font-size: 18px">主页</a></li>
+                <li><a href="AboutUs.html" style="font-size: 18px">联系我们</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="starter-template">
+        <h1>修改学生信息</h1>
+
+        <div class="input-group" style="width: 500px; margin: 30px 30px 30px 300px;">
+            <span class="input-group-addon normal-font" id="_Name"><strong>原姓名</strong></span>
+            <input type="text" id="Name" class="form-control normal-font" placeholder="输入原姓名" aria-describedby="_Name">
+        </div>
+        <div class="input-group" style="width: 500px; margin: 30px 30px 30px 300px;">
+            <span class="input-group-addon normal-font" id="_newName"><strong>新姓名</strong></span>
+            <input type="text" id="newName" class="form-control normal-font" placeholder="输入新姓名" aria-describedby="_newName">
+        </div>
+        <div class="input-group" style="width: 500px;margin: 30px 30px 30px 300px;">
+            <span class="input-group-addon normal-font" id="_Id"><strong>原学号</strong></span>
+            <input type="text" id="Id" class="form-control normal-font" placeholder="输入原学号" aria-describedby="_Id">
+        </div>
+        <div class="input-group" style="width: 500px;margin: 30px 30px 30px 300px;">
+            <span class="input-group-addon normal-font" id="_newId"><strong>新学号</strong></span>
+            <input type="text" id="newId" class="form-control normal-font" placeholder="输入新学号" aria-describedby="_newId">
+        </div>
+        <div class="input-group" style="width: 500px;margin: 30px 30px 30px 300px;">
+            <span class="input-group-addon normal-font" id="_sex"><strong>性别</strong></span>
+            <input type="text" id="sex" class="form-control normal-font" placeholder="性别" aria-describedby="_sex">
+        </div>
+        <div class="input-group" style="width: 500px;margin: 30px 30px 30px 300px;">
+            <span class="input-group-addon normal-font" id="_major"><strong>专业</strong></span>
+            <input type="text" id="major" class="form-control normal-font" placeholder="专业" aria-describedby="_major">
+        </div>
+        <div>
+            <button type="button" id="search" class="btn btn-success normal-font" style="width: 500px;margin: 30px">确认修改
+            </button>
+        </div>
+        <div>
+            <button type="button" id="register" class="btn btn-warning normal-font" style="width: 500px;margin: 30px">
+                放弃上述修改
+            </button>
+        </div>
+
+    </div>
+
+</div>
+
+
+</body>
+</html>
