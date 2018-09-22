@@ -3,14 +3,20 @@
 
 from flask import Flask
 from flask import request
+from flask import render_template
 from flask_cors import *
 
 
 from Webserver.common import db_helper
 from Webserver.config import const
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='../Webpage/')
 CORS(app, supports_credentials=True)
+
+
+@app.route('/')
+def hello_world():
+    return render_template('index.html')
 
 
 @app.route('/simple', methods=['GET', 'POST'])
