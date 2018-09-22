@@ -1,4 +1,4 @@
-#!/usr/bin/evn python
+#!/usr/bin/env python
 # coding=utf-8
 
 import smtplib
@@ -17,7 +17,7 @@ def mail(sender_nickname, recipient_nickname, text_content):
         msg['Subject'] = const.EMAIL_ERR_TITLE  # 邮件的主题，也可以说是标题
 
         # 发件人邮箱中的SMTP服务器
-        server = smtplib.SMTP_SSL(const.EMAIL_SMTP, const.DB_HOST)
+        server = smtplib.SMTP_SSL(const.EMAIL_SMTP, const.EMAIL_PORT)
         # 括号中对应的是发件人邮箱账号、邮箱密码
         server.login(const.EMAIL_USER, const.EMAIL_PWD)
         # 括号中对应的是发件人邮箱账号、收件人邮箱账号、发送邮件
@@ -26,4 +26,3 @@ def mail(sender_nickname, recipient_nickname, text_content):
     except :  # 如果 try 中的语句没有执行，则会执行下面的 ret=False
         ret = False
     return ret
-
