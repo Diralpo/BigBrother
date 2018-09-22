@@ -1,4 +1,5 @@
-# -*- coding: utf-8 -*-
+#!/usr/bin/evn python
+# coding=utf-8
 
 import smtplib
 from email.mime.text import MIMEText
@@ -15,8 +16,8 @@ def mail(sender_nickname, recipient_nickname, text_content):
         msg['To'] = formataddr([recipient_nickname, const.EMAIL_LIST])  # 括号里的对应收件人邮箱昵称、收件人邮箱账号
         msg['Subject'] = const.EMAIL_ERR_TITLE  # 邮件的主题，也可以说是标题
 
-        # 发件人邮箱中的SMTP服务器，端口是465
-        server = smtplib.SMTP_SSL("smtp.qq.com", 465)
+        # 发件人邮箱中的SMTP服务器
+        server = smtplib.SMTP_SSL(const.EMAIL_SMTP, const.DB_HOST)
         # 括号中对应的是发件人邮箱账号、邮箱密码
         server.login(const.EMAIL_USER, const.EMAIL_PWD)
         # 括号中对应的是发件人邮箱账号、收件人邮箱账号、发送邮件
