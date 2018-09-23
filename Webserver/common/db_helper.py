@@ -5,6 +5,7 @@ import pymysql
 import re
 
 from Webserver.config import const
+from Webserver.common import mail_sent
 
 
 #  查找是否具有某数据库
@@ -54,20 +55,48 @@ def login_db(user, pwd, db):
     db = pymysql.connect(host=const.DB_HOST, port=const.DB_PORT, user=user, passwd=pwd, db=db, charset="utf8")
     # 获取游标对象
     cursor = db.cursor()
-    return [db, cursor]
+    return db, cursor
 
 
 # 创建表student
-def create_user_form(cursor):
-    sql_create = "create table student(id int, name varchar(18), pwd varchar(18)) engine = innodb charset = utf8"
+def create_stu_form(cursor):
+    sql_create = "create table student(id INT PRIMARY KEY, name varchar(18) NOT NULL, sex ENUM('man','woman') NOT NULL, contact varchar(30))"
     cursor.execute(sql_create)
 
 
-# 加入新用户
-def insert_user(db, cursor, user_id, name, pwd):
-    sql_insert = '''insert into student values ("{}", "{}", "{}")'''.format(user_id, name, pwd)
+# 删除表student
+def del_stu_form(cursor):
+    sql_create = "drop table if exists student"
+    cursor.execute(sql_create)
+
+
+############################
+#  加入新用户
+#  需传入一个字典，包含
+#   id
+#   name
+#   sex
+#   contact (可缺少)
+def insert_stu(db, cursor, user_data):
+    try:
+        stu_id = user_data['id']
+        name = user_data['name']
+        sex = user_data['sex']
+        try:
+            contact = user_data['contact']
+            sql_insert = '''insert into student(id, name, sex, contact) values ({}, "{}", "{}", "{}")'''.format(stu_id, name, sex, contact)
+        except KeyError:
+            # 传入的字典中无contact 字段
+            sql_insert = '''insert into student(id, name, sex) values ({}, "{}", "{}")'''.format(stu_id, name, sex)
+    except KeyError:
+        # 不可缺少的字段缺失，结束程序
+        # 皮一下，发送邮件
+        mail_sent.mail('表单要素缺失', "表单要素缺失\n{}".format(str(user_data)))
+        return -1
     try:
         cursor.execute(sql_insert)
         db.commit()
-    except:
+        return 0
+    except :
         db.rollback()
+    return -1

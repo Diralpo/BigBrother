@@ -8,13 +8,13 @@ from email.utils import formataddr
 from Webserver.config import const
 
 
-def mail(sender_nickname, recipient_nickname, text_content):
+def mail(err_title, text_content, sender_nickname='Program', recipient_nickname='Programmer'):
     ret = True
-    try:
+    try :
         msg = MIMEText(text_content, 'plain', 'utf-8')
         msg['From'] = formataddr([sender_nickname, const.EMAIL_USER])  # 括号里的对应发件人邮箱昵称、发件人邮箱账号
         msg['To'] = formataddr([recipient_nickname, const.EMAIL_LIST])  # 括号里的对应收件人邮箱昵称、收件人邮箱账号
-        msg['Subject'] = const.EMAIL_ERR_TITLE  # 邮件的主题，也可以说是标题
+        msg['Subject'] = "{}-{}".format(const.EMAIL_ERR_TITLE, err_title)  # 邮件的主题，也可以说是标题
 
         # 发件人邮箱中的SMTP服务器
         server = smtplib.SMTP_SSL(const.EMAIL_SMTP, const.EMAIL_PORT)
