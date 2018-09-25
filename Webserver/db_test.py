@@ -5,6 +5,9 @@ from Webserver.config import const
 from Webserver.common import db_helper
 
 if __name__ == '__main__':
+    db ,cursor = db_helper.login_db("root","123456","studentInfo")
+    db_helper.create_stu_form(cursor,'student')
+    '''
     database, cursor = db_helper.login_db(const.DB_USER, const.DB_PASS, const.DB_NAME)
     db_helper.del_stu_form(cursor)  # 删除student表
     db_helper.create_stu_form(cursor)  # 创建student表
@@ -46,3 +49,4 @@ if __name__ == '__main__':
     db_helper.del_stu(database, cursor, user_data)  # 修改一个数据
     print('删除后查询')
     print(db_helper.query_stu(database, cursor, {'id': 1234}))  # 查找一个数据
+'''

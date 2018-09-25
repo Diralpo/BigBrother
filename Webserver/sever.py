@@ -19,11 +19,16 @@ def hello_world():
     return render_template('index.html')
 
 
-@app.route('/simple', methods=['GET', 'POST'])
-def simple():
-    if request.method == 'POST':
-        print(request.get_json())
-        return str(request.get_json())
+@app.route('/search', methods=['GET', 'POST'])
+def search():
+
+        student = request.get_json()
+        res = db_helper.query_stu(db,cursor,student)
+        if res==None or res == ():
+            print("无查询结果")
+            return ""
+        print(res)
+        return str(res[0]).replace("\'","\"")
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -45,4 +50,5 @@ def main_sign_up():
 
 if __name__ == '__main__':
     #app.run(debug=True,port=8080)
-    app.run(host='0.0.0.0', port=8080)
+    db, cursor = db_helper.login_db(const.DB_USER, const.DB_PASS, const.DB_NAME)
+    app.run(host='127.0.0.1', port=8080)

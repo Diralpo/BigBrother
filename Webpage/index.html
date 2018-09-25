@@ -51,30 +51,48 @@
             <input type="text" class="form-control normal-font" placeholder="输入学号" aria-describedby="_Id" id="Id">
         </div>
         <div>
-            <button type="button" class="btn btn-success normal-font" style="width: 500px;margin: 30px">查询</button>
+            <button type="button" id="search" class="btn btn-success normal-font" style="width: 500px;margin: 30px">查询</button>
         </div>
         <div>
-            <button type="button" class="btn btn-info normal-font" style="width: 500px;margin: 30px">注册新的学生</button>
+            <button type="button" id="register" class="btn btn-info normal-font" style="width: 500px;margin: 30px">注册新的学生</button>
         </div>
 
     </div>
 
 </div>
-<!--
+
 <script>
-    function test() {
-        var data = {"name": "jiangfeng"};
+    $('#search').off().on('click',function () {
+        var name = $('#Name').val()
+        var id = $('#Id').val()
+        var data = {
+            "name":name,
+            "id":id
+        }
+        if(name==''){
+            alert('请输入姓名')
+            return
+        }
+        if(id==''){
+            alert('请输入学号')
+            return
+        }
         $.ajax({
-            type: 'POST',
-            url: 'http://127.0.0.1:8080/simple',
-            data: JSON.stringify(data),  //转化字符串
+            type:'POST',
+            url:'http://127.0.0.1:8080/search',
+            data: JSON.stringify(data),
             contentType: 'application/json; charset=UTF-8',
             success: function (data_return) { //成功的话，得到消息
-                alert(data_return)
+                var key = 'index_data';
+
+                window.localStorage.setItem(key,data_return)
+                window.location.href="result.html"
             }
-        });
-    }
+
+        })
+        
+    })
+
 </script>
--->
 </body>
 </html>
