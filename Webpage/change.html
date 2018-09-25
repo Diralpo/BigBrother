@@ -50,17 +50,16 @@
             <input type="text" id="Name" class="form-control normal-font" placeholder="输入姓名" aria-describedby="_Name">
         </div>
 
-        <label class="radio-inline">
-            <input class="normal-font" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">男
-        </label>
-        <label class="radio-inline">
-            <input class="normal-font" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">女
-        </label>
-
         <div class="input-group" style="width: 500px;margin: 30px 30px 30px 300px;">
-            <span class="input-group-addon normal-font" id="_sex"><strong>性别</strong></span>
-            <input type="text" id="sex" class="form-control normal-font" placeholder="输入性别" aria-describedby="_sex">
+            <span class="input-group-addon normal-font" id="_sex"><strong>选择性别</strong></span>
+        <label class="radio-inline" style="zoom: 150%">
+            <input class="normal-font" type="radio" id="radio-1" name="sexOptions" value="option1">男
+        </label>
+        <label class="radio-inline" style="zoom: 150%">
+            <input class="normal-font"  type="radio" id="radio-2" name="sexOptions" value="option2">女
+        </label>
         </div>
+
         <div class="input-group" style="width: 500px;margin: 30px 30px 30px 300px;">
             <span class="input-group-addon normal-font" id="_contact"><strong>联系方式</strong></span>
             <input type="text" id="contact" class="form-control normal-font" placeholder="输入联系方式"
@@ -82,14 +81,18 @@
 </body>
 <script>
     $('#change').off().on('click', function () {
-        console.log($('#inlineRadio1').val())
+
         var name = $('#Name').val().replace(/^\s+|\s+$/g, "");
         var id = $('#Id').val().replace(/^\s+|\s+$/g, "");
-        var sex = $('#sex').val().replace(/^\s+|\s+$/g, "");
+        var sex1 = $('#radio-1').prop('checked');
+        var sex2 = $('#radio-2').prop('checked');
+
         var contact = $('#contact').val().replace(/^\s+|\s+$/g, "");
-        if (name == '' || id == '' || sex == '' || contact == '') {
+        if (name == '' || id == '' || (!sex1&&!sex2) || contact == '') {
             alert("您需要完整填写上述信息")
+            return
         }
+        var sex = sex1==true?'man':'woman';
 
         var newData = {
             "name": name,

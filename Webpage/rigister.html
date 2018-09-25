@@ -50,10 +50,17 @@
             <span class="input-group-addon normal-font" id="_Id"><strong>学号</strong></span>
             <input type="text" id="Id" class="form-control normal-font" placeholder="输入原学号" aria-describedby="_Id">
         </div>
+
         <div class="input-group" style="width: 500px;margin: 30px 30px 30px 300px;">
-            <span class="input-group-addon normal-font" id="_sex"><strong>性别</strong></span>
-            <input type="text" id="sex" class="form-control normal-font" placeholder="性别" aria-describedby="_sex">
+            <span class="input-group-addon normal-font" id="_sex"><strong>选择性别</strong></span>
+        <label class="radio-inline" style="zoom: 150%">
+            <input class="normal-font" type="radio" id="radio-1" name="sexOptions" value="option1">男
+        </label>
+        <label class="radio-inline" style="zoom: 150%">
+            <input class="normal-font"  type="radio" id="radio-2" name="sexOptions" value="option2">女
+        </label>
         </div>
+
         <div class="input-group" style="width: 500px;margin: 30px 30px 30px 300px;">
             <span class="input-group-addon normal-font" id="_contact"><strong>联系方式</strong></span>
             <input type="text" id="contact" class="form-control normal-font" placeholder="联系方式" aria-describedby="_contact">
@@ -76,11 +83,14 @@
     $('#signUp').off().on('click',function () {
         var name = $('#Name').val().replace(/^\s+|\s+$/g,"");
         var id = $('#Id').val().replace(/^\s+|\s+$/g,"");
-        var sex = $('#sex').val().replace(/^\s+|\s+$/g,"");
+        var sex1 = $('#radio-1').prop('checked');
+        var sex2 = $('#radio-2').prop('checked');
         var contact = $('#contact').val().replace(/^\s+|\s+$/g,"");
-        if(name==''||id==''||sex==''||contact==''){
+        if (name == '' || id == '' || (!sex1&&!sex2) || contact == '') {
             alert("您需要完整填写上述信息")
+            return
         }
+        var sex = sex1==true?'man':'woman';
         var data={
             "name":name,
             "id":id,
