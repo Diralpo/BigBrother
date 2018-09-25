@@ -22,6 +22,15 @@ if __name__ == '__main__':
         'contact': '3211xxx'
     }
     db_helper.insert_stu(database, cursor, user_data)  # 加入一个数据
+    user_data = {
+        'id': 1236,
+        'name': 'jf',
+        'sex': 'man',
+    }
+    db_helper.insert_stu(database, cursor, user_data)  # 加入一个数据
+'''
+
+
     print('修改前查询')
     print(db_helper.query_stu(database, cursor, {'name': 'ma'}))    # 查找一个数据
     print(db_helper.query_stu(database, cursor, {'name': 'mahx'}))  # 查找一个数据
@@ -46,3 +55,5 @@ if __name__ == '__main__':
     db_helper.del_stu(database, cursor, user_data)  # 修改一个数据
     print('删除后查询')
     print(db_helper.query_stu(database, cursor, {'id': 1234}))  # 查找一个数据
+
+'''

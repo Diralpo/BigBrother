@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../Resources/jquery-3.3.1.js"></script>
+    <script src="../Resources/bootstrap.min.js"></script>
+    <link href="../Resources/bootstrap.min.css" rel="stylesheet">
+    <link href="../Resources/MyCss.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar" style="height: 100px">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#" style="font-size: 25px">简易学生信息系统</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#" style="font-size: 18px">主页</a></li>
+                <li><a href="AboutUs.html" style="font-size: 18px">联系我们</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container" id="mian_view">
+    <div class="starter-template" id="op_view">
+        <h1>学生信息查询</h1>
+
+        <div class="input-group" style="width: 500px; margin: 30px 30px 30px 300px;">
+            <span class="input-group-addon normal-font" id="_Name"><strong>姓名</strong></span>
+            <input type="text" class="form-control normal-font" placeholder="输入姓名" aria-describedby="_Name" id="Name">
+        </div>
+        <div class="input-group" style="width: 500px;margin: 30px 30px 30px 300px;">
+            <span class="input-group-addon normal-font" id="_Id"><strong>学号</strong></span>
+            <input type="text" class="form-control normal-font" placeholder="输入学号" aria-describedby="_Id" id="Id">
+        </div>
+        <div>
+            <button type="button" class="btn btn-success normal-font" onclick="getQuery()" style="width: 500px;margin: 30px">查询</button>
+        </div>
+        <div>
+            <button type="button" class="btn btn-info normal-font" style="width: 500px;margin: 30px">注册新的学生</button>
+        </div>
+    </div>
+
+</div>
+<script>
+    function showRes(data) {
+        //根据传入的json数组创建表格
+        var createTable = function (data) {
+            //定义表格
+            var table = document.createElement('table');
+            table.setAttribute('style', 'width: 450px;');
+            //定义表格标题
+            var caption = document.createElement('caption');
+            caption.innerHTML = '查询结果';
+            //将标题添加进表格
+            table.appendChild(caption);
+            //调用createTr()方法生成标题行并将其添加到table中。
+            table.appendChild(createTr('序号', '姓名', '学号', '性别', '联系方式'));
+            table.childNodes[1].setAttribute('style', 'background:#cae8ea;');
+            //alert(table.firstChild);
+            //for循环json对象,然后将循环到的对象通过createTr()方法生成行，添加到table中
+            for (var i = 0; i < data.length; i++) {
+                table.appendChild(createTr(i, data[i].name, data[i].id, data[i].sex, data[i].contact));
+            }
+            return table;
+        };
+        //根据用户传过来的变量生成表格中行的方法
+        var createTr = function (nox, name, age, gender, contact) {
+            //定义行元素标签
+            var tr = document.createElement('tr');
+            //定义列元素标签
+            var tdNo = document.createElement('td');
+            tdNo.innerHTML = nox;
+            var tdName = document.createElement('td');
+            //设置该列节点的文本节点的值
+            tdName.innerHTML = name;
+            var tdAge = document.createElement('td');
+            tdAge.innerHTML = age;
+            var tdGender = document.createElement('td');
+            tdGender.appendChild(document.createTextNode(gender));//等价与 tdGender.innerHTML = gender;
+            var tdContact = document.createElement('td');
+            tdContact.innerHTML = contact;
+            //将列值添加到行元素节点
+            tr.appendChild(tdNo);
+            tr.appendChild(tdName);
+            tr.appendChild(tdAge);
+            tr.appendChild(tdGender);
+            tr.appendChild(tdContact);
+            //返回生成的行标签
+            return tr;
+        };
+        var parent=document.getElementById("mian_view");
+        var child=document.getElementById("op_view");
+        parent.removeChild(child);
+
+        var para=document.createElement("div");
+        para.id="op_view";
+        parent.appendChild(para);
+
+        var body = document.getElementById("op_view");
+        body.appendChild(createTable(data));
+    }
+
+    function sentQuery(stu_id, stu_name) {
+        var data={"name":stu_name, "id":stu_id};
+                $.ajax({
+                    type: 'POST',
+                    url:'http://127.0.0.1:8080/query',
+                    data:JSON.stringify(data),  //转化字符串
+                    contentType: 'application/json; charset=UTF-8',
+                    success:function(data_return){ //成功的话，得到消息
+                        var obj = eval('(' + data_return + ')');
+                        showRes(obj);
+                    }
+                });
+    }
+    function getQuery( ){
+        var stu_id = document.getElementById("Id").value;
+        var stu_name = document.getElementById("Name").value;
+        if(stu_id=='' && stu_name==''){
+            alert("不可同时为空")
+        }
+        else{
+            sentQuery(stu_id, stu_name);
+        }
+    }
+</script>
+</body>
+</html>
