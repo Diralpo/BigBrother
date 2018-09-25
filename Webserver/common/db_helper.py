@@ -154,7 +154,7 @@ def del_stu(db, cursor, user_data):
         sql = "delete from student where id={}".format(stu_id)
         cursor.execute(sql)
         db.commit()
-    except KeyError:
+    except BaseException:
         # 无学号信息，不支持按姓名删除
         return -1
     return 0

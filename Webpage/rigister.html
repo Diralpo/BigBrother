@@ -39,40 +39,32 @@
 <div class="container">
 
     <div class="starter-template">
-        <h1>修改学生信息</h1>
+        <h1>新建学生信息</h1>
 
-        <div class="input-group" style="width: 500px;margin: 30px 30px 30px 300px;">
-            <span class="input-group-addon normal-font" id="_Id"><strong>学号（不可更改）</strong></span>
-            <input type="text" id="Id" class="form-control normal-font" placeholder="输入学号" aria-describedby="_Id">
-        </div>
         <div class="input-group" style="width: 500px; margin: 30px 30px 30px 300px;">
             <span class="input-group-addon normal-font" id="_Name"><strong>姓名</strong></span>
             <input type="text" id="Name" class="form-control normal-font" placeholder="输入姓名" aria-describedby="_Name">
         </div>
 
-        <label class="radio-inline">
-            <input class="normal-font" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">男
-        </label>
-        <label class="radio-inline">
-            <input class="normal-font" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">女
-        </label>
-
+        <div class="input-group" style="width: 500px;margin: 30px 30px 30px 300px;">
+            <span class="input-group-addon normal-font" id="_Id"><strong>学号</strong></span>
+            <input type="text" id="Id" class="form-control normal-font" placeholder="输入原学号" aria-describedby="_Id">
+        </div>
         <div class="input-group" style="width: 500px;margin: 30px 30px 30px 300px;">
             <span class="input-group-addon normal-font" id="_sex"><strong>性别</strong></span>
-            <input type="text" id="sex" class="form-control normal-font" placeholder="输入性别" aria-describedby="_sex">
+            <input type="text" id="sex" class="form-control normal-font" placeholder="性别" aria-describedby="_sex">
         </div>
         <div class="input-group" style="width: 500px;margin: 30px 30px 30px 300px;">
             <span class="input-group-addon normal-font" id="_contact"><strong>联系方式</strong></span>
-            <input type="text" id="contact" class="form-control normal-font" placeholder="输入联系方式"
-                   aria-describedby="_contact">
+            <input type="text" id="contact" class="form-control normal-font" placeholder="联系方式" aria-describedby="_contact">
         </div>
         <div>
-            <button type="button" id="change" class="btn btn-success normal-font" style="width: 500px;margin: 30px">确认修改
+            <button type="button" id="signUp" class="btn btn-success normal-font" style="width: 500px;margin: 30px">新建
             </button>
         </div>
         <div>
             <button type="button" id="cancel" class="btn btn-warning normal-font" style="width: 500px;margin: 30px">
-                放弃上述修改
+                放弃
             </button>
         </div>
 
@@ -81,34 +73,32 @@
 </div>
 </body>
 <script>
-    $('#change').off().on('click', function () {
-        console.log($('#inlineRadio1').val())
-        var name = $('#Name').val().replace(/^\s+|\s+$/g, "");
-        var id = $('#Id').val().replace(/^\s+|\s+$/g, "");
-        var sex = $('#sex').val().replace(/^\s+|\s+$/g, "");
-        var contact = $('#contact').val().replace(/^\s+|\s+$/g, "");
-        if (name == '' || id == '' || sex == '' || contact == '') {
+    $('#signUp').off().on('click',function () {
+        var name = $('#Name').val().replace(/^\s+|\s+$/g,"");
+        var id = $('#Id').val().replace(/^\s+|\s+$/g,"");
+        var sex = $('#sex').val().replace(/^\s+|\s+$/g,"");
+        var contact = $('#contact').val().replace(/^\s+|\s+$/g,"");
+        if(name==''||id==''||sex==''||contact==''){
             alert("您需要完整填写上述信息")
         }
-
-        var newData = {
-            "name": name,
-            "id": id,
-            "sex": sex,
-            "contact": contact
-        };
+        var data={
+            "name":name,
+            "id":id,
+            "sex":sex,
+            "contact":contact
+        }
 
         $.ajax({
-            type: 'POST',
-            url: 'http://127.0.0.1:8080/change',
-            data: JSON.stringify(newData),
+            type:'POST',
+            url:'http://127.0.0.1:8080/signUp',
+            data: JSON.stringify(data),
             contentType: 'application/json; charset=UTF-8',
             success: function (data_return) { //成功的话，得到消息
-                if (data_return == "0") {
-                    alert("更新信息成功")
+                if(data_return=="0"){
+                    alert("新建用户成功")
                 }
                 else {
-                    alert("更新信息失败")
+                    alert("新建用户失败")
                 }
             }
 

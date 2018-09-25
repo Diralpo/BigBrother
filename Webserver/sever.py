@@ -31,21 +31,37 @@ def search():
         return str(res[0]).replace("\'","\"")
 
 
-@app.route('/login', methods=['GET', 'POST'])
-def main_sign_in():
-    if request.method == 'POST':
-        print(request.get_json())
-        try:
-            db, cursor = db_helper.login_db(request.get_json()['name'], request.get_json()['pwd'], const.DB_NAME)
-            print('success')
-            return 'success'
-        except:
-            return "error"
+@app.route('/delete', methods=['GET', 'POST'])
+def delete():
+    data = request.get_json()
+    res = db_helper.del_stu(db,cursor,data)
+    if res==0:
+        print("删除成功")
+    else:
+        print("删除失败")
+    return str(res)
 
 
-@app.route('/signup', methods=['GET', 'POST'])
-def main_sign_up():
-    print("待定")
+@app.route('/signUp', methods=['GET', 'POST'])
+def signUp():
+    data = request.get_json()
+    res = db_helper.insert_stu(db,cursor,data)
+    if res==0:
+        print("新建用户成功")
+    else:
+        print("新建用户失败")
+    return str(res)
+
+
+@app.route('/change', methods=['GET', 'POST'])
+def change():
+    data = request.get_json()
+    res = db_helper.tran_stu(db,cursor,data)
+    if res==0:
+        print("更新用户信息成功")
+    else:
+        print("更新用户信息失败")
+    return str(res)
 
 
 if __name__ == '__main__':
