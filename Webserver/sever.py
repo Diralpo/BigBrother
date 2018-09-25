@@ -28,7 +28,7 @@ def search():
             print("无查询结果")
             return ""
         print(res)
-        return str(res[0]).replace("\'","\"")
+        return str(res[0]).replace("\'", "\"")
 
 
 @app.route('/login', methods=['GET', 'POST'])

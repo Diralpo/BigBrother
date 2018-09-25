@@ -127,23 +127,22 @@ def insert_stu(db, cursor, user_data):
 def query_stu(db, cursor, user_data):
     try:
         stu_id = user_data['id']
-        sql = "select * from student where id={}".format(stu_id)
-        cursor.execute(sql)
-        res = cursor.fetchall()
-        return res
-    except KeyError:
-        # 无学号信息，查询姓名
-        try:
+        if stu_id is "":
+            sql = "select * from student where id={}".format(stu_id)
+            cursor.execute(sql)
+            res = cursor.fetchall()
+        else:
             stu_name = user_data['name']
             sql = "select * from student where name like '{}'".format(stu_name)
             cursor.execute(sql)
             res = cursor.fetchall()
-            return res
-        except KeyError:
-            # 不可缺少的字段缺失，结束程序
-            # mail_sent.mail('加入学生信息', "表单要素缺失\n{}".format(str(user_data)))
-            return None
-    return None
+        return res
+    except KeyError:
+        # 无学号信息，不支持按姓名删除
+        # mail_sent.mail('查询学生信息', "表单要素缺失\n{}".format(str(user_data)))
+        return None
+    except:
+        return None
 
 
 #####################
@@ -154,10 +153,12 @@ def del_stu(db, cursor, user_data):
         sql = "delete from student where id={}".format(stu_id)
         cursor.execute(sql)
         db.commit()
+        return 0
     except KeyError:
         # 无学号信息，不支持按姓名删除
         return -1
-    return 0
+    except:
+        return -2
 
 
 #####################
@@ -177,8 +178,10 @@ def tran_stu(db, cursor, user_data):
                 name, sex, stu_id)
     except KeyError:
         # 不可缺少的字段缺失，结束程序
-        # mail_sent.mail('加入学生信息', "表单要素缺失\n{}".format(str(user_data)))
+        # mail_sent.mail('修改学生信息', "表单要素缺失\n{}".format(str(user_data)))
         return -1
+    except:
+        return -2
     try:
         cursor.execute(sql_insert)
         db.commit()
