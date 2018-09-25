@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../Resources/jquery-3.3.1.js"></script>
+    <script src="../Resources/bootstrap.min.js"></script>
+    <link href="../Resources/bootstrap.min.css" rel="stylesheet">
+    <link href="../Resources/MyCss.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 50px;
+        }
+    </style>
+
+
+</head>
+<body>
+
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar" style="height: 100px">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#" style="font-size: 25px">简易学生信息系统</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#" style="font-size: 18px">主页</a></li>
+                <li><a href="AboutUs.html" style="font-size: 18px">联系我们</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="starter-template">
+        <h1>查询结果</h1>
+
+        <table class="table table-hover normal-font">
+            <thead>
+            <tr>
+                <th style="text-align: center">学号</th>
+                <th style="text-align: center">姓名</th>
+                <th style="text-align: center">性别</th>
+                <th style="text-align: center">联系方式</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td id = "id"></td>
+                <td id = "name"></td>
+                <td id = "sex"></td>
+                <td id = "contact"></td>
+
+            </tr>
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+<script>
+
+        var key = "index_data";
+        var res = window.localStorage.getItem(key)
+        if (res==""){
+            alert("没有查到结果")
+        }
+        else {
+            var res_json = JSON.parse(res)
+            console.log(res_json['id'])
+            document.getElementById("id").innerHTML = res_json['id']
+            document.getElementById("name").innerHTML = res_json['name']
+            document.getElementById("sex").innerHTML = res_json['sex']
+            document.getElementById("contact").innerHTML = res_json['contact']
+        }
+
+</script>
+
+</body>
+</html>

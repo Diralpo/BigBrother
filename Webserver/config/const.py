@@ -5,7 +5,7 @@
 ##################################################################################
 ### 数据库参数 ###
 # 数据库名称
-DB_NAME = 'mytest'
+DB_NAME = 'studentinfo'
 # 数据库链接地址
 DB_HOST = '127.0.0.1'
 # 数据库端口
@@ -13,7 +13,7 @@ DB_PORT = 3306
 # 数据库账号
 DB_USER = 'root'
 # 数据库登录密码
-DB_PASS = '********'
+DB_PASS = 'diralpo'
 
 ##################################################################################
 ### 邮件服务参数 ###
@@ -22,10 +22,10 @@ EMAIL_SMTP = 'smtp.qq.com'
 # 邮件服务器端口
 EMAIL_PORT = 465
 # email发送账号
-EMAIL_USER = 'xxxxxxxx@qq.com'
+EMAIL_USER = '735612944@qq.com'
 # email发送密码
-EMAIL_PWD = 'xxxxxxxxxxxx'
-# 系统异常邮件通知地址，多个地址用逗号分隔
-EMAIL_LIST = 'xxxxxxxxxx@qq.com'
-# 异常邮件通知标题
-EMAIL_ERR_TITLE = '系统异常通知-开发'
+EMAIL_PWD = 'mjrontqyobydbfad'
+# 系统异常邮件通知地址
+EMAIL_LIST = '295536022@qq.com'
+# 异常邮件通知
+EMAIL_ERR_TITLE = '系统异常通知'

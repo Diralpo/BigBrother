@@ -55,7 +55,7 @@ def del_database(cursor, db_name):
 # 提供账户及密码登陆数据库
 def login_db(user, pwd, db_name):
     try:
-        db = pymysql.connect(host=const.DB_HOST, port=const.DB_PORT, user=user, passwd=pwd, db=db_name, charset="utf8")
+        db = pymysql.connect(host=const.DB_HOST, port=const.DB_PORT, user=user, passwd=pwd, db=db_name, charset="utf8", cursorclass = pymysql.cursors.DictCursor)
         # 获取游标对象
         cursor = db.cursor()
         return db, cursor
@@ -66,7 +66,7 @@ def login_db(user, pwd, db_name):
         cursor = db.cursor()
         create_database(cursor, db_name)
 
-        db = pymysql.connect(host=const.DB_HOST, port=const.DB_PORT, user=user, passwd=pwd, db=db_name, charset="utf8")
+        db = pymysql.connect(host=const.DB_HOST, port=const.DB_PORT, user=user, passwd=pwd, db=db_name, charset="utf8", cursorclass = pymysql.cursors.DictCursor)
         # 获取游标对象
         cursor = db.cursor()
         return db, cursor
@@ -138,13 +138,12 @@ def query_stu(db, cursor, user_data):
             sql = "select * from student where name like '{}'".format(stu_name)
             cursor.execute(sql)
             res = cursor.fetchall()
-            # print(res)
             return res
         except KeyError:
             # 不可缺少的字段缺失，结束程序
             # mail_sent.mail('加入学生信息', "表单要素缺失\n{}".format(str(user_data)))
-            return ()
-    return ()
+            return None
+    return None
 
 
 #####################
